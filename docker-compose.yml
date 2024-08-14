@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: ./text-gen-app
+    ports:
+      - "8081:80"
+    depends_on:
+      - api-gateway
+
+  backend:
+    build:
+      context: ./text_generator
+    ports:
+      - "5001:5000"
+
+  api-gateway:
+    build:
+      context: ./text-gen-api-gateway
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
